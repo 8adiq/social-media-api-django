@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from rest_framework import viewsets
+from rest_framework import viewsets,generics
 # from .permissions import IsOwnerOrReadOnly
 from .models import Post
 from .serializer import PostSerializer
@@ -13,5 +13,14 @@ class PostViewset(viewsets.ModelViewSet):
     serializer_class = PostSerializer
     permission_classes = [IsAuthenticated]
 
-    # def perform_create(self, serializer):
-    #     serializer.save(user=self.request.user)
+    def perform_create(self, serializer):
+        serializer.save(username=self.request.user)
+
+
+# class PostDetailView(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = Post.objects.all()
+#     serializer_class = PostSerializer
+#     permission_classes = [IsAuthenticated]
+
+
+

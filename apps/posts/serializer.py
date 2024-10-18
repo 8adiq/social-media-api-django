@@ -3,7 +3,6 @@ from rest_framework import serializers
 
 
 class PostSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Post
         fields = ['id','text','image','video','created_at']
