@@ -1,8 +1,13 @@
 from django.urls import path,include
-from .views import CommentView,LikeView
+from .views import CommentViewset,LikeViewset
+from rest_framework.routers import DefaultRouter
+
+
+router = DefaultRouter()
+router.register(r'comments', CommentViewset)
+router.register(r'likes',LikeViewset)
 
 
 urlpatterns = [
-    path('comments/',CommentView.as_view(),name='comment-craete'),
-    path('likes/',LikeView.as_view(),name='like-craete')
+    path('',include(router.urls))
 ]
