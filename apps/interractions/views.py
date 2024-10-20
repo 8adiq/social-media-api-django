@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from rest_framework.permissions import IsAuthenticated
+from .permission import IsOwnerOrReadOnly
 from .serializer import CommentSerializer,LikeSerializer
 from .models import Comment,Like
 from rest_framework import viewsets
@@ -8,11 +9,10 @@ from rest_framework.decorators import action
 
 # Create your views here.
 
-
 class CommentViewset(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated,IsOwnerOrReadOnly]
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
