@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-7xt+s!5g(-#*umhe0!8hyulpd)7$hmem8zft_w%2w1qj&8zatq
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['social-media-api-bsfmbnbbh4g6hvfy.southafricanorth-01.azurewebsites.net']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -68,7 +68,6 @@ AUTH_USER_MODEL = 'users.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware'
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -159,5 +158,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 STATIC_URL = '/static'
-STATICFILEs_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-STATIC_ROOT = BASE_DIR/'staticfiles'
+
