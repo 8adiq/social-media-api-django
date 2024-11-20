@@ -10,6 +10,8 @@ from rest_framework.decorators import action
 # Create your views here.
 
 class CommentViewset(viewsets.ModelViewSet):
+    """A viewset for viewing, creating, and deleting comments."""
+
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
     permission_classes = [IsAuthenticated,IsOwnerOrReadOnly]
@@ -24,6 +26,8 @@ class CommentViewset(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 class LikeViewset(viewsets.ModelViewSet):
+    """A viewset for viewing and creating likes."""
+
     queryset = Like.objects.all()
     serializer_class = LikeSerializer
     permission_classes = [IsAuthenticated]
@@ -31,7 +35,7 @@ class LikeViewset(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
-    @action(detail=False,methods=['GET'],url_path='post/(?P<post_id>[^/.]+)')
+    @action(detail=False,methods=['GET','POST'],url_path='post/(?P<post_id>[^/.]+)')
     def number_of_likes(self,request,post_id=None):
         Likes = Like.objects.filter(post_id=post_id).count()
         return Response({'post_id':post_id, 'number of like': Likes})

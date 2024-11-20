@@ -9,6 +9,7 @@ from rest_framework.permissions import IsAuthenticated
 # Create your views here.
 
 class PostViewset(viewsets.ModelViewSet):
+    """A viewset for viewing, creating, and deleting posts."""
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = [IsAuthenticated,IsOwnerOrReadOnly]

@@ -16,8 +16,31 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from rest_framework_simplejwt.views import TokenObtainPairView,TokenRefreshView
+from rest_framework import permissions
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+
+
+schema_view = get_schema_view(
+    openapi.Info(
+        title='Social Media API',
+        default_version='v1',
+        description='API documentation for a social media app',
+        terms_of_service='https://www.example.com/terms/',
+        contact=openapi.Contact(email='abdullatifsadiq21@gmail.com'),
+        license=openapi.License(name='BSD License')
+    ),
+    public=True,
+    permission_classes=(permissions.AllowAny,),
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api-auth/',include('rest_framework.urls'))
+    path ('login/',TokenObtainPairView.as_view(),name='obtain_token_pair'),
+    path('refresh/',TokenRefreshView.as_view(),name='refresh_token'),
+    path('posts/',include('apps.posts.urls')),
+    path('users/',include('apps.users.urls')),
+    path('interractions/',include('apps.interractions.urls')),
+    path('swagger/',schema_view.with_ui('swagger', cache_timeout=0),name='schema-swagger-ui')
 ]

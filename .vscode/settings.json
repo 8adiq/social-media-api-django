@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/15a0dbb3-61ad-4dbb-aaa6-fac0df5e989f/resourceGroups/socialmedia/providers/Microsoft.Web/sites/social-media-api",
+    "appService.deploySubpath": "."
+}
